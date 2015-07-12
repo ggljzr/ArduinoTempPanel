@@ -68,9 +68,8 @@ function drawChart(plotData)
     };
 
     var chart = new google.visualization.LineChart(document.getElementById('chart'));
-
     chart.draw(data, options);
-
+    document.getElementById('exportPngButton').href = chart.getImageURI();
 }
 
 function getCurrentTemp()

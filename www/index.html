@@ -30,7 +30,18 @@
       </span>
     </div>
 
-    <button id="refreshButton" onclick="location.reload()">Obnovit</button>
+    <button id="refreshButton" class="button1" onclick="location.reload()">Obnovit</button>
+
+    <p style="display:none" id="pButtons">
+      <a id="exportPngButton" class='button2'>.png</a>
+      <br>
+      <a id="exportCsvButton" class='button2' href='tempLog.txt'>.csv</a>
+    </p>
+
+    <button id="exportButton" class='button1' onclick="$('#pButtons').slideToggle()">Export</button>
+
+    <div id='png'></div>
+
 
   </body>
 </html>
