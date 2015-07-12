@@ -4,9 +4,10 @@
 #include <Bridge.h>
 #include <YunServer.h>
 #include <YunClient.h>
-#include <FileIO.h>
 
 // pin definition for the Leonardo
+//changed cs and dc pins because of
+//Yuns serial interface
 #define cs   7
 #define dc   9
 #define rst  10
@@ -20,7 +21,6 @@ char sensorPrintout[6];
 
 void setup() {
 
-  // Put this line at the beginning of every sketch that uses the GLCD:
   TFTscreen.begin();
   Bridge.begin();
   server.listenOnLocalhost();
@@ -43,6 +43,7 @@ void setup() {
   TFTscreen.text("C",130,20);
 }
 
+//processing of simple rest call 
 void process(YunClient client, float temp)
 {
    String command = client.readStringUntil('/');
@@ -54,10 +55,11 @@ void process(YunClient client, float temp)
 
 void loop() {
   
-  //prijeti dalsiho klienta
+  //get next client
   YunClient client = server.accept();
-  
-   // Read the value of the sensor on A0
+ 
+  //temperature calculation
+  //3.3 voltage reference is used 
   int reading = analogRead(A0);
   float voltage = reading * 3.3;
   voltage /= 1024.0;
