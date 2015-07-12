@@ -1,0 +1,36 @@
+ <html>
+  <head>
+  	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="tempPanel.css">
+  	<script type="text/javascript" src="tempPanel.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    
+    <script type="text/javascript"
+        src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+    }"></script>
+
+
+
+  <h1>Teploměr</h1>
+
+  </head>
+  <body onload="temperatureChart();getCurrentTemp()">
+    <div id="chart"></div>
+    <div id="currentTemp">
+      Současná teplota
+      <span id="temp">
+        123
+      </span>
+    </div>
+
+    <button id="refreshButton" onclick="location.reload()">Obnovit</button>
+
+  </body>
+</html>
