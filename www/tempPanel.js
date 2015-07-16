@@ -25,7 +25,7 @@ function parseLog(log)
 	for(var i = 0; i < lines.length;i++)
 	{
 		entry = lines[i].split(' ');
-		time = entry[0];
+		time = entry[0].substring(0,2);
 		temperature = parseFloat(entry[1]);
 		plotData.push([time, temperature]);
 	}
@@ -74,5 +74,75 @@ function drawChart(plotData)
 
 function getCurrentTemp()
 {
-	$('#temp').load('/arduino/getTemp')
+	$('#temp').load('/arduino/getTemp');
+}
+
+function loadForecast()
+{
+  $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?q=Prague&units=metric&cnt=3', function (data)
+  {
+    loadLocation(data.city);
+    loadForecastData(data.list);
+  });
+}
+
+function loadLocation(locationData)
+{
+  document.getElementById('city').innerHTML = locationData.name;
+  lon = locationData.coord.lon;
+  lat = locationData.coord.lat;
+  document.getElementById('coords').innerHTML = ' (' + String(lon) + ', ' + String(lat) + ') ';
+}
+
+function loadForecastData(forecastData)
+{
+  var unixDate;
+
+  for(i = 0; i < 3; i++) //forecast for three days
+  {
+    unixDate = parseInt(forecastData[i].dt);
+    elemId = 'day' + String(i+1);
+    document.getElementById(elemId + 'day').innerHTML = getWeekDay(unixDate);
+    document.getElementById(elemId + 'image').src = 'icons/' + forecastData[i].weather[0].icon + '.png';
+    document.getElementById(elemId + 'date').innerHTML = getDateString(unixDate);
+    document.getElementById(elemId + 'temp').innerHTML = 'Teplota: ' + forecastData[i].temp.day + ' °C';
+    document.getElementById(elemId + 'hum').innerHTML = 'Vlhkost: ' + forecastData[i].humidity + ' %';
+  }
+}
+
+function getDateString(unixDate)
+{
+  
+  date = new Date(unixDate * 1000);
+  day = String(date.getDate());
+  month = String(date.getMonth() + 1);
+  year = String(date.getFullYear());
+
+  return year + '/' + month + '/' + day;
+}
+
+function getWeekDay(unixDate)
+{
+  date = new Date(unixDate * 1000);
+
+  dayNum = date.getDay();
+
+  switch (dayNum){
+    case 0:
+      return 'Neděle';
+    case 1:
+      return 'Pondělí';
+    case 2:
+      return 'Úterý';
+    case 3:
+      return 'Středa';
+    case 4:
+      return 'Čtvrtek';
+    case 5:
+      return 'Pátek';
+    case 6:
+      return 'Sobota';
+    default:
+      return 'Default';
+  }
 }

@@ -37,6 +37,11 @@ button.button1:hover {
     background: #45b7ff;
 }
 
+button#refreshButton
+{
+	margin-bottom: 5%;
+}
+
 .button2
 {
 	display: block;
@@ -58,4 +63,46 @@ button.button1:hover {
 {
 	 background: #26D376;
 }
+
+.weatherLink
+{
+	text-align: center;
+	color:#5EBDB5;
+	font-size: 15;
+}
+
+.weatherLink:hover
+{
+	color:#86DDCD;
+}
+
+div#location
+{
+	text-align: center;
+	color:#21AE6C;
+
+}
+
+div.weekday
+{
+	color:#AC395A;
+}
+
+li.day
+{
+	text-align: center;
+	display: inline-block;
+	color:#98A2A4;
+	width: 20%
+}
+
+ul#days
+{
+	margin-left: 25%
+}
+
+img.weatherIcon
+{
+	width: 100px;
+	height: 100px;
 }

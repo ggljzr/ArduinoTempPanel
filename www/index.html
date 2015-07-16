@@ -21,7 +21,7 @@
   <h1>Teploměr</h1>
 
   </head>
-  <body onload="temperatureChart();getCurrentTemp()">
+  <body onload="temperatureChart();getCurrentTemp();loadForecast()">
     <div id="chart"></div>
     <div id="currentTemp">
       Současná teplota
@@ -29,8 +29,6 @@
         123
       </span>
     </div>
-
-    <button id="refreshButton" class="button1" onclick="location.reload()">Obnovit</button>
 
     <p style="display:none" id="pButtons">
       <a id="exportPngButton" class='button2'>.png</a>
@@ -42,6 +40,44 @@
 
     <div id='png'></div>
 
+    <h1>Předpověď
 
+    <div class='weatherLink'>
+    <a href="http://www.openweathermap.org" class='weatherLink'>www.openweathermap.org</a>
+    </div>
+
+    </h1>
+
+    <div id="location">
+      <b><span id="city"></span></b>
+      <span id="coords"></span>
+    </div>
+
+    <ul id='days'>
+      <li id='day1' class='day'>
+        <b><div id='day1day' class='weekday'></div></b>
+        <div id='day1date'></div>
+        <img id='day1image' src="icons/none.png" class='weatherIcon'>
+        <div id='day1temp'></div>
+        <div id='day1hum'></div>
+      </li>
+      <li id='day2' class='day'>
+        <b><div id='day2day' class='weekday'></div></b>
+        <div id='day2date'></div>
+        <img id='day2image' src="icons/none.png" class='weatherIcon'>
+        <div id='day2temp'></div>
+        <div id='day2hum'></div>
+      </li>
+      <li id='day3' class='day'>
+        <b><div id='day3day' class='weekday'></div></b>
+        <div id='day3date'></div>
+        <img id='day3image' src="icons/none.png" class='weatherIcon'>
+        <div id='day3temp'></div>
+        <div id='day3hum'></div>
+      </li>
+    </ul>
+    </div>
+
+    <button id="refreshButton" class="button1" onclick="location.reload()">Obnovit</button>
   </body>
 </html>
