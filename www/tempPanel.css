@@ -4,6 +4,10 @@ h1 {
     font-family: "Times New Roman", Times, serif
 }
 
+body
+{
+
+}
 
 
 div#chart
@@ -83,6 +87,26 @@ div#location
 
 }
 
+span.dayTemp
+{
+	color:#5294E2;
+}
+
+span.dayHum
+{
+	color:#AC395A;
+}
+
+span.dayPress
+{
+	color:#21AE6C;
+}
+
+span.nightTemp
+{
+	color:#000066;
+}
+
 div.weekday
 {
 	color:#AC395A;
@@ -93,12 +117,12 @@ li.day
 	text-align: center;
 	display: inline-block;
 	color:#98A2A4;
-	width: 20%
+	width: 32%
 }
 
 ul#days
 {
-	margin-left: 25%
+	margin-left: 1%
 }
 
 img.weatherIcon

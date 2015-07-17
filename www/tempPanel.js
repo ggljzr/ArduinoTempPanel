@@ -103,10 +103,12 @@ function loadForecastData(forecastData)
     unixDate = parseInt(forecastData[i].dt);
     elemId = 'day' + String(i+1);
     document.getElementById(elemId + 'day').innerHTML = getWeekDay(unixDate);
-    document.getElementById(elemId + 'image').src = 'icons/' + forecastData[i].weather[0].icon + '.png';
+    document.getElementById(elemId + 'image').src = 'icons/' +  forecastData[i].weather[0].icon + '.png';
     document.getElementById(elemId + 'date').innerHTML = getDateString(unixDate);
-    document.getElementById(elemId + 'temp').innerHTML = 'Teplota: ' + forecastData[i].temp.day + ' °C';
-    document.getElementById(elemId + 'hum').innerHTML = 'Vlhkost: ' + forecastData[i].humidity + ' %';
+    document.getElementById(elemId + 'temp').innerHTML = '<b>' + forecastData[i].temp.day + ' °C' + '</b>'
+    document.getElementById('night' + String(i + 1) + 'temp').innerHTML = '<b>' + forecastData[i].temp.night + ' °C' + '</b>';
+    document.getElementById(elemId + 'hum').innerHTML = '<b>' + forecastData[i].humidity + ' %' + '</b>';
+    document.getElementById(elemId + 'press').innerHTML =   '<b>' + forecastData[i].pressure + ' hPa' + '</b>';
   }
 }
 
