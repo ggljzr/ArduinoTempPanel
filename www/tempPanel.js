@@ -79,7 +79,7 @@ function getCurrentTemp()
 
 function loadForecast()
 {
-  $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?q=Prague&units=metric&cnt=3', function (data)
+  $.getJSON('http://api.openweathermap.org/data/2.5/forecast/daily?q=Prague&units=metric&cnt=5', function (data)
   {
     loadLocation(data.city);
     loadForecastData(data.list);
@@ -98,12 +98,20 @@ function loadForecastData(forecastData)
 {
   var unixDate;
 
-  for(i = 0; i < 3; i++) //forecast for three days
+  for(i = 0; i < 5; i++) //forecast for five days
   {
     unixDate = parseInt(forecastData[i].dt);
     elemId = 'day' + String(i+1);
     document.getElementById(elemId + 'day').innerHTML = getWeekDay(unixDate);
+
     document.getElementById(elemId + 'image').src = 'icons/' +  forecastData[i].weather[0].icon + '.png';
+    document.getElementById(elemId + 'image').title = 'Denní teplota: ' + forecastData[i].temp.min + '/' +
+                                                       forecastData[i].temp.day + '/' + 
+                                                       forecastData[i].temp.max + ' °C' +
+                                                       '\nNoc: ' + forecastData[i].temp.night + ' °C' +
+                                                       '\nVečer: ' + forecastData[i].temp.eve + ' °C' +
+                                                       '\nRáno: ' + forecastData[i].temp.morn + ' °C'; 
+
     document.getElementById(elemId + 'date').innerHTML = getDateString(unixDate);
     document.getElementById(elemId + 'temp').innerHTML = '<b>' + forecastData[i].temp.day + ' °C' + '</b>'
     document.getElementById('night' + String(i + 1) + 'temp').innerHTML = '<b>' + forecastData[i].temp.night + ' °C' + '</b>';

@@ -117,16 +117,23 @@ li.day
 	text-align: center;
 	display: inline-block;
 	color:#98A2A4;
-	width: 32%
+	width: 19%
 }
 
 ul#days
 {
-	margin-left: 1%
+	
 }
 
 img.weatherIcon
 {
 	width: 100px;
 	height: 100px;
+	border-radius: 100px;
+	transition:all .4s;
+}
+
+img.weatherIcon:hover
+{
+	opacity: 0.8;
 }
