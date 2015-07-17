@@ -9,7 +9,9 @@ part of the board via Bridge library (Bridge.put()). Current temperature can als
 call ('arduino.local/arduino/getTemp')
 
 Linux part runs a python script that logs temperature values into a .txt file every hour. Temperature chart is displayed
-on a web page placed on Yún's webserver ('arduino.local/sd/TempPanel').
+on a web page placed on Yún's webserver ('arduino.local/sd/TempPanel'). 
+
+Web page also displays weather forecast for next five days (forecast is provided by openweathermap.org). Forecast location (Prague) is hardwired into js code for the moment.
 
 Text file contains 24 hour log, with oldest entry erased a new entry added every hour (FIFO).
 
