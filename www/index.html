@@ -21,26 +21,24 @@
   <h1>Teploměr</h1>
 
   </head>
-  <body onload="temperatureChart();getCurrentTemp();loadForecast()">
+  <body onload="refresh()">
     <div id="chart"></div>
-    <div id="currentTemp">
+    <div id="currenttemp">
       Současná teplota
       <b><span id="temp">
         123
       </span> °C</b>
     </div>
 
-    <p style="display:none" id="pButtons">
-      <a id="exportPngButton" class='button2'>.png</a>
+    <p style="display:none" id="pbuttons">
+      <a id="exportpngbutton" class='button2'>.png</a>
       <br>
-      <a id="exportCsvButton" class='button2' href='tempLog.txt'>.csv</a>
+      <a id="exportcsvbutton" class='button2' href='tempLog.txt'>.csv</a>
     </p>
 
-    <button id="exportButton" class='button1' onclick="$('#pButtons').slideToggle()">Export</button>
+    <button id="exportbutton" class='button1' onclick="$('#pbuttons').slideToggle()">Export</button>
 
-    <div id='png'></div>
-
-    <h1>Předpověď
+    <h1>Dnešní den
 
     <div class='weatherLink'>
     <a href="http://www.openweathermap.org/city/3067696" class='weatherLink'>www.openweathermap.org</a>
@@ -53,55 +51,89 @@
       <span id="coords"></span>
     </div>
 
+    <ul id='currentstate'>
+      <li id='currentweatherState' class='currentWeatherItem'>
+        <img id='currentweathericon' src='icons/none.png'>
+      </li>
+      <li id='currentweatherbasic' class='currentWeatherItem'>
+        <b><span id='currentweekday' class='weekday'></span></b>
+        <span id='currentdate'></span>
+        <div>Den: <b><span id='currentdaytemp' class='dayTemp'></span></b></div>
+        <div>Noc: <b><span id='currentnighttemp' class='nightTemp'></span></b></div>
+        <div>Oblačnost: <b><span id='currentclouds' class='dayClouds'></span></b></div>
+        <div>Vlhkost: <b><span id='currenthum' class='dayHum'></span></b></div>
+        <div>Tlak: <b><span id='currentpress' class='dayPress'></span></b></div>
+      </li>
+      <li id='currentweatherextend' class='currentWeatherItem'>
+        <div>Slunce</div>
+        <div class='extendSub'>
+          <div>Východ: <b><span id='sunrise'></span></b></div>
+          <div>Západ: <b><span id='sunset'></span></b></div>
+        </div>
+
+        <div>Vítr
+        </div>
+        <div class='extendSub'>
+          <div>Rychlost: <b><span id='windspeed'></span></b>
+           <span><img id='windicon' src='icons/arrow.png'></span>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <h1>Předpověď</h1>
+
     <ul id='days'>
       <li id='day1' class='day'>
         <b><div id='day1day' class='weekday'></div></b>
         <div id='day1date'></div>
         <img id='day1image' src="icons/none.png" class='weatherIcon'>
-        <div>Den: <span id='day1temp' class='dayTemp'></span></div>
-        <div>Noc: <span id='night1temp' class='nightTemp'></span></div>
-        <div>Vlhkost: <span id='day1hum' class='dayHum'></span></div>
-        <div>Tlak: <span id='day1press' class='dayPress'></span></div>
+        <div>Den: <b><span id='day1temp' class='dayTemp'></span></b></div>
+        <div>Noc: <b><span id='night1temp' class='nightTemp'></span></b></div>
+        <div>Vlhkost: <b><span id='day1hum' class='dayHum'></span></b></div>
+        <div>Tlak: <b><span id='day1press' class='dayPress'></span></b></div>
       </li>
       <li id='day2' class='day'>
         <b><div id='day2day' class='weekday'></div></b>
         <div id='day2date'></div>
         <img id='day2image' src="icons/none.png" class='weatherIcon'>
-        <div>Den: <span id='day2temp' class='dayTemp'></span></div>
-        <div>Noc: <span id='night2temp' class='nightTemp'></span></div>
-        <div>Vlhkost: <span id='day2hum' class='dayHum'></span></div>
-        <div>Tlak: <span id='day2press' class='dayPress'></span></div>
+        <div>Den: <b><span id='day2temp' class='dayTemp'></span></b></div>
+        <div>Noc: <b><span id='night2temp' class='nightTemp'></span></b></div>
+        <div>Vlhkost: <b><span id='day2hum' class='dayHum'></span></b></div>
+        <div>Tlak: <b><span id='day2press' class='dayPress'></span></b></div>
       </li>
       <li id='day3' class='day'>
         <b><div id='day3day' class='weekday'></div></b>
         <div id='day3date'></div>
         <img id='day3image' src="icons/none.png" class='weatherIcon'>
-        <div>Den: <span id='day3temp' class='dayTemp'></span></div>
-        <div>Noc: <span id='night3temp' class='nightTemp'></span></div>
-        <div>Vlhkost: <span id='day3hum' class='dayHum'></span></div>
-        <div>Tlak: <span id='day3press' class='dayPress'></span></div>
+        <div>Den: <b><span id='day3temp' class='dayTemp'></span></b></div>
+        <div>Noc: <b><span id='night3temp' class='nightTemp'></span></b></div>
+        <div>Vlhkost: <b><span id='day3hum' class='dayHum'></span></b></div>
+        <div>Tlak: <b><span id='day3press' class='dayPress'></span></b></div>
       </li>
       <li id='day4' class='day'>
         <b><div id='day4day' class='weekday'></div></b>
         <div id='day4date'></div>
         <img id='day4image' src="icons/none.png" class='weatherIcon'>
-        <div>Den: <span id='day4temp' class='dayTemp'></span></div>
-        <div>Noc: <span id='night4temp' class='nightTemp'></span></div>
-        <div>Vlhkost: <span id='day4hum' class='dayHum'></span></div>
-        <div>Tlak: <span id='day4press' class='dayPress'></span></div>
+        <div>Den: <b><span id='day4temp' class='dayTemp'></span></b></div>
+        <div>Noc: <b><span id='night4temp' class='nightTemp'></span></b></div>
+        <div>Vlhkost: <b><span id='day4hum' class='dayHum'></span></b></div>
+        <div>Tlak: <b><span id='day4press' class='dayPress'></span></b></div>
       </li>
       <li id='day5' class='day'>
         <b><div id='day5day' class='weekday'></div></b>
         <div id='day5date'></div>
         <img id='day5image' src="icons/none.png" class='weatherIcon'>
-        <div>Den: <span id='day5temp' class='dayTemp'></span></div>
-        <div>Noc: <span id='night5temp' class='nightTemp'></span></div>
-        <div>Vlhkost: <span id='day5hum' class='dayHum'></span></div>
-        <div>Tlak: <span id='day5press' class='dayPress'></span></div>
+        <div>Den: <b><span id='day5temp' class='dayTemp'></span></b></div>
+        <div>Noc: <b><span id='night5temp' class='nightTemp'></span></b></div>
+        <div>Vlhkost: <b><span id='day5hum' class='dayHum'></span></b></div>
+        <div>Tlak: <b><span id='day5press' class='dayPress'></span></b></div>
       </li>
     </ul>
     </div>
 
-    <button id="refreshButton" class="button1" onclick="location.reload()">Obnovit</button>
+    <button id="refreshbutton" class="button1" onclick="location.reload()">Obnovit</button>
+
+    <h1></h1>
   </body>
 </html>

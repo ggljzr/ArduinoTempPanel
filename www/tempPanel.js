@@ -1,3 +1,10 @@
+function refresh()
+{
+  temperatureChart();
+  getCurrentTemp();
+  loadForecast();
+  loadCurrentWeather();
+}
 
 function temperatureChart()
 {
@@ -69,12 +76,44 @@ function drawChart(plotData)
 
     var chart = new google.visualization.LineChart(document.getElementById('chart'));
     chart.draw(data, options);
-    document.getElementById('exportPngButton').href = chart.getImageURI();
+    document.getElementById('exportpngbutton').href = chart.getImageURI();
 }
 
 function getCurrentTemp()
 {
 	$('#temp').load('/arduino/getTemp');
+}
+
+function loadCurrentWeather()
+{
+  $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=Prague&units=metric', function(data)
+  {
+    var unixDate = parseInt(data.dt);
+
+    document.getElementById('currentweekday').innerHTML = getWeekDay(unixDate);
+    document.getElementById('currentdate').innerHTML = getDateString(unixDate);
+
+    document.getElementById('currentdaytemp').innerHTML = data.main.temp + ' °C';
+    document.getElementById('currentnighttemp').innerHTML =  data.main.temp_min + ' °C';
+    document.getElementById('currentclouds').innerHTML = data.clouds.all + ' %';
+    document.getElementById('currenthum').innerHTML = data.main.humidity + ' %';
+    document.getElementById('currentpress').innerHTML = data.main.pressure + ' hPa';
+
+    document.getElementById('currentweathericon').src = 'icons/' +  data.weather[0].icon + '.png';
+
+    document.getElementById('sunrise').innerHTML = getTimeString(parseInt(data.sys.sunrise));
+    document.getElementById('sunset').innerHTML = getTimeString(parseInt(data.sys.sunset));
+
+    document.getElementById('windspeed').innerHTML = data.wind.speed + ' m/s';
+    setWindDir(parseInt(data.wind.deg));
+  });
+}
+
+function setWindDir(degrees)
+{
+  document.getElementById('windicon').title = 'Směr: ' + degrees + '°';
+  degrees = 360 - degrees;
+  document.getElementById('windicon').style = 'transform: rotate(' + degrees + 'deg);';
 }
 
 function loadForecast()
@@ -113,10 +152,10 @@ function loadForecastData(forecastData)
                                                        '\nRáno: ' + forecastData[i].temp.morn + ' °C'; 
 
     document.getElementById(elemId + 'date').innerHTML = getDateString(unixDate);
-    document.getElementById(elemId + 'temp').innerHTML = '<b>' + forecastData[i].temp.day + ' °C' + '</b>'
-    document.getElementById('night' + String(i + 1) + 'temp').innerHTML = '<b>' + forecastData[i].temp.night + ' °C' + '</b>';
-    document.getElementById(elemId + 'hum').innerHTML = '<b>' + forecastData[i].humidity + ' %' + '</b>';
-    document.getElementById(elemId + 'press').innerHTML =   '<b>' + forecastData[i].pressure + ' hPa' + '</b>';
+    document.getElementById(elemId + 'temp').innerHTML = forecastData[i].temp.day + ' °C'
+    document.getElementById('night' + String(i + 1) + 'temp').innerHTML = forecastData[i].temp.night + ' °C';
+    document.getElementById(elemId + 'hum').innerHTML = forecastData[i].humidity + ' %';
+    document.getElementById(elemId + 'press').innerHTML =   forecastData[i].pressure + ' hPa';
   }
 }
 
@@ -129,6 +168,20 @@ function getDateString(unixDate)
   year = String(date.getFullYear());
 
   return year + '/' + month + '/' + day;
+}
+
+function getTimeString(unixDate)
+{
+  time = new Date(unixDate * 1000);
+  hours = String(time.getHours());
+  minutes = String(time.getMinutes());
+  seconds = String(time.getSeconds());
+
+  hours = (hours < 10 ) ? '0' + hours : hours;
+  minutes = (minutes < 10 ) ? '0' + minutes : minutes;
+  seconds = (seconds < 10 ) ? '0' + seconds : seconds;
+
+  return hours + ':' + minutes + ':' + seconds;
 }
 
 function getWeekDay(unixDate)

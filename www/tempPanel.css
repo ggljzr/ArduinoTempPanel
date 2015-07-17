@@ -17,7 +17,7 @@ div#chart
 	height : 70%;
 }
 
-div#currentTemp
+div#currenttemp
 {
 	color: #98A2A4;
 	text-align: center;
@@ -39,11 +39,6 @@ button.button1
 
 button.button1:hover {
     background: #45b7ff;
-}
-
-button#refreshButton
-{
-	margin-bottom: 5%;
 }
 
 .button2
@@ -87,12 +82,12 @@ div#location
 
 }
 
-span.dayTemp
+span.dayTemp,#sunrise
 {
 	color:#5294E2;
 }
 
-span.dayHum
+span.dayHum,#windspeed
 {
 	color:#AC395A;
 }
@@ -102,14 +97,20 @@ span.dayPress
 	color:#21AE6C;
 }
 
-span.nightTemp
+span.nightTemp,#sunset
 {
 	color:#000066;
 }
 
-div.weekday
+.weekday
 {
 	color:#AC395A;
+}
+
+div.extendSub
+{
+	margin-left: 5px;
+	font-size: 13px;
 }
 
 li.day
@@ -118,6 +119,19 @@ li.day
 	display: inline-block;
 	color:#98A2A4;
 	width: 19%
+}
+
+li.currentWeatherItem
+{
+	text-align: left;
+	display: inline-block;
+	color:#98A2A4;
+	width: 20%;
+}
+
+ul#currentstate
+{
+	margin-left: 25%;
 }
 
 ul#days
@@ -129,11 +143,25 @@ img.weatherIcon
 {
 	width: 100px;
 	height: 100px;
-	border-radius: 100px;
+	border-radius: 50px;
 	transition:all .4s;
 }
 
-img.weatherIcon:hover
+img#currentweathericon
+{
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+}
+
+img#windicon
+{
+	width:13px;
+	height:13px;
+	border-radius: 10px;
+}
+
+img.weatherIcon:hover,#windicon:hover
 {
 	opacity: 0.8;
 }
