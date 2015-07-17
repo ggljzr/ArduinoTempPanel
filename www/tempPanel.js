@@ -93,8 +93,8 @@ function loadCurrentWeather()
     document.getElementById('currentweekday').innerHTML = getWeekDay(unixDate);
     document.getElementById('currentdate').innerHTML = getDateString(unixDate);
 
-    document.getElementById('currentdaytemp').innerHTML = data.main.temp + ' °C';
-    document.getElementById('currentnighttemp').innerHTML =  data.main.temp_min + ' °C';
+    document.getElementById('currentmaxtemp').innerHTML = data.main.temp + ' °C';
+    document.getElementById('currentmintemp').innerHTML =  data.main.temp_min + ' °C';
     document.getElementById('currentclouds').innerHTML = data.clouds.all + ' %';
     document.getElementById('currenthum').innerHTML = data.main.humidity + ' %';
     document.getElementById('currentpress').innerHTML = data.main.pressure + ' hPa';

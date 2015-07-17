@@ -31,9 +31,9 @@
     </div>
 
     <p style="display:none" id="pbuttons">
-      <a id="exportpngbutton" class='button2'>.png</a>
+      <a id="exportpngbutton" class='button2' target='_blank'>.png</a>
       <br>
-      <a id="exportcsvbutton" class='button2' href='tempLog.txt'>.csv</a>
+      <a id="exportcsvbutton" class='button2' href='tempLog.txt' target='_blank'>.csv</a>
     </p>
 
     <button id="exportbutton" class='button1' onclick="$('#pbuttons').slideToggle()">Export</button>
@@ -58,8 +58,8 @@
       <li id='currentweatherbasic' class='currentWeatherItem'>
         <b><span id='currentweekday' class='weekday'></span></b>
         <span id='currentdate'></span>
-        <div>Den: <b><span id='currentdaytemp' class='dayTemp'></span></b></div>
-        <div>Noc: <b><span id='currentnighttemp' class='nightTemp'></span></b></div>
+        <div>Max: <b><span id='currentmaxtemp' class='dayTemp'></span></b></div>
+        <div>Min: <b><span id='currentmintemp' class='nightTemp'></span></b></div>
         <div>Oblačnost: <b><span id='currentclouds' class='dayClouds'></span></b></div>
         <div>Vlhkost: <b><span id='currenthum' class='dayHum'></span></b></div>
         <div>Tlak: <b><span id='currentpress' class='dayPress'></span></b></div>
