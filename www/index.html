@@ -22,16 +22,13 @@
 
   </head>
   <body onload="refresh()">
-    <div id="chart"></div>
-    <div id="currenttemp">
-      Současná teplota
-      <b><span id="temp">
-        123
-      </span> °C</b>
-    </div>
+    <div id="tempchart" class="chart"></div>
+    <div id="humchart" class="chart"></div>
 
     <p style="display:none" id="pbuttons">
-      <a id="exportpngbutton" class='button2' target='_blank'>.png</a>
+      <a id="exporttempbutton" class='button2' target='_blank'>.png (teplota)</a>
+      <br>
+      <a id="exporthumbutton" class='button2' target='_blank'>.png (vlhkost)</a>
       <br>
       <a id="exportcsvbutton" class='button2' href='tempLog.txt' target='_blank'>.csv</a>
     </p>

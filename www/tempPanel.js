@@ -16,7 +16,8 @@ function temperatureChart()
  		success : function(result)
  		{
  			plotData = parseLog(result);
- 			drawChart(plotData);
+ 			drawTempChart(plotData.temp);
+			drawHumChart(plotData.hum);
  		}
 	});
 	
@@ -25,22 +26,33 @@ function temperatureChart()
 function parseLog(log)
 {
 	lines = log.split('\n');
-	plotData = [];
+	tempData = [];
+	humData = [];
 
-	plotData.push(['Čas', 'Teplota'])
+	tempData.push(['Čas', 'TMP36', 'DHT11']);
+	humData.push(['Čas', 'DHT11']);
 
 	for(var i = 0; i < lines.length;i++)
 	{
 		entry = lines[i].split(' ');
 		time = entry[0].substring(0,2);
-		temperature = parseFloat(entry[1]);
-		plotData.push([time, temperature]);
+		temperatureTMP36 = parseFloat(entry[1]);
+		temperatureDHT11 = parseFloat(entry[2]);
+		humidity = parseInt(entry[3]);
+		tempData.push([time, temperatureTMP36, temperatureDHT11]);
+		humData.push([time, humidity]);
+	}
+	
+	var plotData = 
+	{
+		temp: tempData,
+		hum: humData
 	}
 
 	return plotData;
 }
 
-function drawChart(plotData)
+function drawTempChart(plotData)
 {
 	var data = google.visualization.arrayToDataTable(plotData);
 
@@ -48,12 +60,12 @@ function drawChart(plotData)
           title: 'Průběh teploty během posledních 24 hodin',
           titleTextStyle:
           	{
-          		color: '98A2A4',
+          		color: '#98A2A4',
           		bold: 'true'
           },
-          legend: 'none',
+          //legend: 'none',
           pointSize: 5,
-          colors: ['#26d376'],
+          colors: ['#26d376', '#d1154a'],
           hAxis:
           {
           	title : 'Čas',
@@ -74,9 +86,48 @@ function drawChart(plotData)
           }
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('chart'));
+    var chart = new google.visualization.LineChart(document.getElementById('tempchart'));
     chart.draw(data, options);
-    document.getElementById('exportpngbutton').href = chart.getImageURI();
+    document.getElementById('exporttempbutton').href = chart.getImageURI();
+}
+
+function drawHumChart(plotData)
+{
+	var data = google.visualization.arrayToDataTable(plotData);
+
+	var options = 
+	{
+		title: 'Průběh vlhkosti během posledních 24 hodin',
+		titleTextStyle:
+		{
+			color: '#98A2A4',
+			bold: 'true'
+		},
+		pointSize: 5,
+		colors: ['#FFC107'],
+		hAxis:
+		{
+			title: 'Čas',
+			titleTextStyle:
+			{
+				color:'#5294E2',
+				bold: 'true'
+			}
+		},
+		vAxis:
+		{
+			title: 'Vlhkost (%)',
+			titleTextStyle:
+			{
+				color: '#FFB300',
+				bold: 'true'
+			}
+		}
+	};
+
+	var chart = new google.visualization.LineChart(document.getElementById('humchart'));
+	chart.draw(data,options);
+	 document.getElementById('exporthumbutton').href = chart.getImageURI();
 }
 
 function getCurrentTemp()

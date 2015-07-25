@@ -10,19 +10,12 @@ body
 }
 
 
-div#chart
+div.chart
 {
 	margin-left: 15%;
 	width : 70%;
 	height : 70%;
 }
-
-div#currenttemp
-{
-	color: #98A2A4;
-	text-align: center;
-}
-
 button.button1
 {
 	margin-left: 45%;
@@ -43,12 +36,11 @@ button.button1:hover {
 
 .button2
 {
-	display: block;
+    display: block;
     width: 10%;
     margin-left: 45%;
     padding-top: 10px;
     padding-bottom: 10px;
-    background: #21AE6C;
     border: none;
     color: #f0f0f0;
     text-align: center;
@@ -60,8 +52,28 @@ button.button1:hover {
 
 .button2:hover
 {
-	 background: #26D376;
+    opacity: 0.8;
 }
+
+.button2#exporttempbutton
+{
+    background: #21AE6C; 
+}
+
+
+
+.button2#exporthumbutton
+{
+    background: #FFB300;
+}
+
+
+
+.button2#exportcsvbutton
+{
+    background: #d1154a;
+}
+
 
 .weatherLink
 {
