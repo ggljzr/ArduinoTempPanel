@@ -18,10 +18,12 @@
 
 
 
-  <h1>Teploměr</h1>
 
   </head>
+
   <body onload="refresh()">
+  
+    <h1>Teploměr</h1>
     <div id="tempchart" class="chart"></div>
     <div id="humchart" class="chart"></div>
 
@@ -34,8 +36,9 @@
     </p>
 
     <button id="exportbutton" class='button1' onclick="$('#pbuttons').slideToggle()">Export</button>
+    <button id="switch" class="button1" onclick="switchCharts()">Vlhkost</button>
 
-    <h1>Dnešní den
+    <h1>Dnešní den</h1>
 
     <div class='weatherLink'>
     <a href="http://www.openweathermap.org/city/3067696" class='weatherLink'>www.openweathermap.org</a>

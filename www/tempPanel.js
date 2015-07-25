@@ -1,12 +1,32 @@
 function refresh()
 {
-  temperatureChart();
+  charts();
   getCurrentTemp();
   loadForecast();
   loadCurrentWeather();
+  $('#humchart').hide(1);
 }
 
-function temperatureChart()
+function switchCharts()
+{
+	button = document.getElementById('switch');
+
+	if($('#humchart').is(':hidden'))
+	{
+		button.innerHTML = 'Teplota';
+		button.style.background = '#21AE6C'
+		$('#humchart').slideDown();
+		$('#tempchart').slideUp();
+	}
+	else if($('#tempchart').is(':hidden'))
+	{
+		button.innerHTML = 'Vlhkost';
+		button.style.background = '#FFB300'
+		$('#humchart').slideUp();
+		$('#tempchart').slideDown();
+	}
+}
+function charts()
 {
 	$.ajax({
   		method: "GET",
@@ -90,6 +110,7 @@ function drawTempChart(plotData)
     chart.draw(data, options);
     document.getElementById('exporttempbutton').href = chart.getImageURI();
 }
+
 
 function drawHumChart(plotData)
 {
@@ -260,3 +281,4 @@ function getWeekDay(unixDate)
       return 'Default';
   }
 }
+

@@ -16,6 +16,7 @@ div.chart
 	width : 70%;
 	height : 70%;
 }
+
 button.button1
 {
 	margin-left: 45%;
@@ -31,7 +32,12 @@ button.button1
 }
 
 button.button1:hover {
-    background: #45b7ff;
+   opacity: 0.8; 
+}
+
+button.button1#switch
+{
+	background: #FFB300;
 }
 
 .button2
