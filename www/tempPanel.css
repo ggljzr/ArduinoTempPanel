@@ -175,5 +175,6 @@ img#windicon
 
 img.weatherIcon:hover,#windicon:hover
 {
-	opacity: 0.8;
+	border-radius: 0;
+	/*opacity: 0.8;*/
 }
