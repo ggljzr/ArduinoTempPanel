@@ -9,7 +9,7 @@ Program running on ATmega32U4 displays current temperature/humidity on ArduinoTF
 part of the board via Bridge library (Bridge.put()). Current temperature can also be obtained via REST 
 call ('arduino.local/arduino/getTemp')
 
-Linux part runs a python script that logs temperature values into a .txt file every hour. Temperature and humidity charts are displayed on a web page placed on Yún's webserver ('arduino.local/sd/TempPanel'). Temperature chart shows data collected with both TMP36 (analog) and DHT11 (digital) sensors. Humidity chart shows data from DHT11 sensor.
+Linux part runs a python script that logs temperature values into a .txt file every hour. Temperature and humidity charts are displayed on a web page placed on Yún's webserver ('arduino.local/sd/TempPanel'). Address of the web page may vary depending on the name of directory in Yún's 'www' folder. Temperature chart shows data collected with both TMP36 (analog) and DHT11 (digital) sensors. Humidity chart shows data from DHT11 sensor.
 
 Web page also displays weather forecast for next five days (forecast is provided by openweathermap.org). Forecast location (Prague) is hardwired into js code for the moment.
 
