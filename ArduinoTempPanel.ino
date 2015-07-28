@@ -1,6 +1,8 @@
 #include <TFT.h>  // Arduino LCD library
 #include <SPI.h>
 
+#include "DHT.h"
+
 #include <Bridge.h>
 #include <YunServer.h>
 #include <YunClient.h>
@@ -12,9 +14,16 @@
 #define dc   9
 #define rst  10
 
+#define DHTPIN 4
+#define DHTTYPE DHT11
+
+#define LOOP_DELAY 2000
+
 // create an instance of the library
 TFT TFTscreen = TFT(cs, dc, rst);
 YunServer server;
+
+DHT dht(DHTPIN, DHTTYPE);
 
 // char array to print to the screen
 char sensorPrintout[6];
@@ -22,6 +31,7 @@ char sensorPrintout[6];
 void setup() {
 
   TFTscreen.begin();
+  dht.begin();
   Bridge.begin();
   server.listenOnLocalhost();
   server.begin();
@@ -63,23 +73,30 @@ void loop() {
   int reading = analogRead(A0);
   float voltage = reading * 3.3;
   voltage /= 1024.0;
-  float temperatureC = (voltage - 0.5) * 100;
-  String tempString = String(temperatureC);
+  float tempTMP36 = (voltage - 0.5) * 100;
+  float tempDHT11 = dht.readTemperature();
+  float hum = dht.readHumidity();
+  String stringTMP36 = String(tempTMP36);
+  String stringHum = String(hum);
+  String stringDHT11 = String(tempDHT11);
+  
+  String answer = stringTMP36 + ' ' + stringDHT11 + ' ' + stringHum;
   
   if (client) {
-    process(client, temperatureC);
+    process(client, tempTMP36);
     client.stop();
   }
 
   // convert the reading to a char array
-  tempString.toCharArray(sensorPrintout, 6);
-
+  stringTMP36.toCharArray(sensorPrintout, 6);
+  Bridge.put("temp", answer);  
+  
   // set the font color
   TFTscreen.stroke(255, 255, 255);
   // print the sensor value
   TFTscreen.text(sensorPrintout, 0, 20);
   // wait for a moment
-  delay(1000);
+  delay(LOOP_DELAY);
   // erase the text you just wrote
   TFTscreen.stroke(0, 0, 0);
   TFTscreen.text(sensorPrintout, 0, 20);
