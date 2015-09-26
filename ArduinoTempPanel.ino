@@ -54,13 +54,20 @@ void setup() {
 }
 
 //processing of simple rest call 
-void process(YunClient client, float temp)
+void process(YunClient client, float temp, float hum)
 {
    String command = client.readStringUntil('/');
    command.trim();
    
-   if(command == "getTemp")  
-     client.print(temp);
+   if(command == "getTemp"){
+  	client.print(temp);
+	return;
+   }
+   
+   if(command == "getHum"){
+	client.print(hum);
+	return;
+   }
 }
 
 void loop() {
@@ -83,7 +90,7 @@ void loop() {
   String answer = stringTMP36 + ' ' + stringDHT11 + ' ' + stringHum;
   
   if (client) {
-    process(client, tempTMP36);
+    process(client, tempTMP36, hum);
     client.stop();
   }
 
