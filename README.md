@@ -17,4 +17,4 @@ Text file contains 24 hour log, with oldest entry erased a new entry added every
 
 File is accessed with jQuery/AJAX, plotting is done with Google charts library.
 
-TODO: display current humidity on tft display. It would also probably be better to make panel more server side, maybe with flask or node.js.
+TODO: display current humidity on tft display. It would also probably be better to make panel more server side, maybe with flask or node.js. Also access to openweathermap api now requires api key, so that needs to be worked in.
